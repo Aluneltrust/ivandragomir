@@ -2,7 +2,7 @@ import { MediaRenderer, ThirdwebNftMedia, useContract, useContractEvents, useVal
 import { ETHERSCAN_URL, MARKETPLACE_ADDRESS, NETWORK, NFT_COLLECTION_ADDRESS, } from "../../../const/addresses";
 import React, { useState } from "react";
 import Container from "../../../components/Container/Container";
-import { GetStaticProps, GetStaticPaths } from "next";
+import { GetServerSideProps } from "next";
 import { NFT, ThirdwebSDK } from "@thirdweb-dev/sdk";
 import styles from "../../../styles/Token.module.css";
 import Link from "next/link";
@@ -341,48 +341,30 @@ export default function TokenPage({ nft, contractMetadata }: Props) {
   );
 }
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const tokenId = context.params?.tokenId as string;
 
-  const sdk = new ThirdwebSDK(NETWORK);
+  const sdk = new ThirdwebSDK(NETWORK, {
+    secretKey: process.env.THIRDWEB_SECRET_KEY,
+  });
 
   const contract = await sdk.getContract(NFT_COLLECTION_ADDRESS);
-
   const nft = await contract.erc721.get(tokenId);
 
   let contractMetadata;
 
   try {
     contractMetadata = await contract.metadata.get();
-  } catch (e) { }
+  } catch (e) {
+    contractMetadata = null;
+  }
 
   return {
     props: {
       nft,
-      contractMetadata: contractMetadata || null,
+      contractMetadata,
     },
-    revalidate: 1, // https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration
   };
 };
-
-export const getStaticPaths: GetStaticPaths = async () => {
-  const sdk = new ThirdwebSDK(NETWORK);
-
-  const contract = await sdk.getContract(NFT_COLLECTION_ADDRESS);
-
-  const nfts = await contract.erc721.getAll();
-
-  const paths = nfts.map((nft) => {
-    return {
-      params: {
-        contractAddress: NFT_COLLECTION_ADDRESS,
-        tokenId: nft.metadata.id,
-      },
-    };
-  });
-
-  return {
-    paths,
-    fallback: "blocking", // can also be true or 'blocking'
   };
-};
+}
