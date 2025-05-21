@@ -1,20 +1,43 @@
 import type { AppProps } from "next/app";
 import { ThirdwebProvider } from "@thirdweb-dev/react";
+import { ChakraProvider } from "@chakra-ui/react";
 import "../styles/globals.css";
+import { Navbar } from "../components/Navbar/Navbar";
 
-// This is the chain your dApp will work on.
-// Change this to the chain your app is built for.
-// You can also import additional chains from `@thirdweb-dev/chains` and pass them directly.
-const activeChain = "ethereum";
+import NextNProgress from "nextjs-progressbar";
+
+import { Polygon } from "@thirdweb-dev/chains";
+
+
+// const NETWORK = {
+
+//   chainId: 1285,
+//   rpc: ["https://moonriver.rpc.thirdweb.com"],
+//   nativeCurrency: { decimals: 18, name: "Moonriver Network", symbol: "MOVR" },
+//   shortName: "Movr",
+//   slug: "Moonriver",
+//   testnet: false,
+//   chain: "Moonriver",
+//   name: "Moonriver Network",
+
+// };
+
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ThirdwebProvider
-      clientId={process.env.NEXT_PUBLIC_TEMPLATE_CLIENT_ID}
-      activeChain={activeChain}
-    >
-      <Component {...pageProps} />
-    </ThirdwebProvider>
+    <ThirdwebProvider activeChain={Polygon}>
+      <NextNProgress
+        color="var(--color-tertiary)"
+        startPosition={0.3}
+        stopDelayMs={200}
+        height={3}
+        showOnShallow={true}
+      />
+      <ChakraProvider>
+        <Navbar />
+        <Component {...pageProps} />
+      </ChakraProvider>
+    </ThirdwebProvider >
   );
 }
 

@@ -1,108 +1,32 @@
-import { ConnectWallet } from "@thirdweb-dev/react";
+import NextLink from 'next/link'
+import type { NextPage } from "next";
+import { Button, Container, Flex, Heading, Image, Stack, Box } from '@chakra-ui/react';
 import styles from "../styles/Home.module.css";
-import Image from "next/image";
-import { NextPage } from "next";
 
 const Home: NextPage = () => {
   return (
-    <main className={styles.main}>
-      <div className={styles.container}>
-        <div className={styles.header}>
-          <h1 className={styles.title}>
-            Welcome to{" "}
-            <span className={styles.gradientText0}>
-              <a
-                href="https://thirdweb.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                thirdweb.
-              </a>
-            </span>
-          </h1>
+    <Container maxW={"1200px"}>
 
-          <p className={styles.description}>
-            Get started by configuring your desired network in{" "}
-            <code className={styles.code}>src/index.js</code>, then modify the{" "}
-            <code className={styles.code}>src/App.js</code> file!
-          </p>
+      {/* Adjust the Box component to push content down if the navbar overlaps */}
+      <Box pt={{ base: "100px", md: "150px" }}> {/* Adjust padding-top as needed */}
 
-          <div className={styles.connect}>
-            <ConnectWallet
-              dropdownPosition={{
-                side: "bottom",
-                align: "center",
-              }}
-            />
-          </div>
-        </div>
+        <Flex h={"80vh"} alignItems={"center"} justifyContent={"center"}>
 
-        <div className={styles.grid}>
-          <a
-            href="https://portal.thirdweb.com/"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              src="/images/portal-preview.png"
-              alt="Placeholder preview of starter"
-              width={300}
-              height={200}
-            />
-            <div className={styles.cardText}>
-              <h2 className={styles.gradientText1}>Portal ➜</h2>
-              <p>
-                Guides, references, and resources that will help you build with
-                thirdweb.
-              </p>
-            </div>
-          </a>
+          <Stack spacing={6} align={"center"}>
 
-          <a
-            href="https://thirdweb.com/dashboard"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              src="/images/dashboard-preview.png"
-              alt="Placeholder preview of starter"
-              width={300}
-              height={200}
-            />
-            <div className={styles.cardText}>
-              <h2 className={styles.gradientText2}>Dashboard ➜</h2>
-              <p>
-                Deploy, configure, and manage your smart contracts from the
-                dashboard.
-              </p>
-            </div>
-          </a>
+            {/* Make Image responsive */}
+            <Image src="/hero.png" width={{ base: "80vw", md: "500px" }} height={{ base: "80vw", md: "500px" }} alt="Hero" />
 
-          <a
-            href="https://thirdweb.com/templates"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              src="/images/templates-preview.png"
-              alt="Placeholder preview of templates"
-              width={300}
-              height={200}
-            />
-            <div className={styles.cardText}>
-              <h2 className={styles.gradientText3}>Templates ➜</h2>
-              <p>
-                Discover and clone template projects showcasing thirdweb
-                features.
-              </p>
-            </div>
-          </a>
-        </div>
-      </div>
-    </main>
+            <Heading className={styles.heroTitle}> Welcome to IVAN DRAGOMIR™ Chopper Club!</Heading>
+            <Button className={styles.heroCta} as={NextLink} href='/buy'>Buy Here</Button>
+
+          </Stack>
+
+        </Flex>
+
+      </Box>
+
+    </Container>
   );
 };
 

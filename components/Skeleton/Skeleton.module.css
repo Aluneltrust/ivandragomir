@@ -1,0 +1,20 @@
+.skeleton {
+  width: 100%;
+  background: linear-gradient(to right, rgb(238, 230, 230) 0%, rgb(66, 65, 65) 50%, rgb(183, 28, 5) 100%);
+  background-size: 400% 400%;
+  animation: pulse 2s ease-in-out infinite;
+  min-height: 3px;
+  max-height: 30%;
+  padding: 2px;
+  margin: 2px;
+}
+
+@keyframes pulse {
+  0% {
+    background-position: 0% 0%;
+  }
+
+  100% {
+    background-position: -135% 0%;
+  }
+}
