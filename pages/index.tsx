@@ -17,7 +17,7 @@ const Home: NextPage = () => {
             {/* Make Image responsive */}
             <Image src="/hero.png" width={{ base: "80vw", md: "500px" }} height={{ base: "80vw", md: "500px" }} alt="Hero" />
 
-            <Heading className={styles.heroTitle}> Welcome to IVAN DRAGOMIR™ Chopper Club!</Heading>
+            <Heading className={styles.heroTitle}> Welcome to IVAN PETROVICH DRAGOMIR™ Chopper Club!</Heading>
             <Button className={styles.heroCta} as={NextLink} href='/buy'>Buy Here</Button>
 
           </Stack>
