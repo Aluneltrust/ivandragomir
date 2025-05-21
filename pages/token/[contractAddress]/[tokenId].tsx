@@ -16,7 +16,8 @@ type Props = {
   contractMetadata: any;
 };
 
-const [randomColor1, randomColor2] = [randomColor(), randomColor()];
+const randomColor1 = randomColor();
+const randomColor2 = randomColor();
 
 export default function TokenPage({ nft, contractMetadata }: Props) {
   const [bidValue, setBidValue] = useState<string>();
@@ -366,5 +367,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   };
 };
-  };
-}
+ 
